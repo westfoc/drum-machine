@@ -24,11 +24,14 @@ class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
     };
   }
 
-  
+  renderRows = (): JSX.Element[] => {
+    const { numOfRows }: DrumFaceState = this.state;
+    return numOfRows.map((item: InstrumentMeta, i: number) => (
+      <InstrumentRow title={item.title} key={`${item}row${i}`} />
+    ));
+  };
 
   render() {
-    const { numOfRows } = this.state;
-
     return (
       <div
         style={{
@@ -39,7 +42,7 @@ class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
       >
         <div
           style={{
-            width: "750px",
+            width: "770px",
             height: "300px",
             border: "1px solid darkgrey",
             display: "flex",
@@ -51,9 +54,7 @@ class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
             backgroundColor: "#6e6e6e",
           }}
         >
-          {numOfRows.map((item: InstrumentMeta, i: number) => (
-            <InstrumentRow title={item.title} key={`${item}row${i}`} />
-          ))}
+          {this.renderRows()}
         </div>
       </div>
     );
