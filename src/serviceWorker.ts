@@ -46,6 +46,7 @@ export function register(config?: Config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
+          // tslint:disable
           console.log(
             "This web app is being served cache-first by a service " +
               "worker. To learn more, visit https://bit.ly/CRA-PWA"
@@ -87,7 +88,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              console.log("Content is cached for offline use.");
+              console.log("Content is cached for offline use."); // tslint:disable-line
 
               // Execute callback
               if (config && config.onSuccess) {
@@ -99,7 +100,7 @@ function registerValidSW(swUrl: string, config?: Config) {
       };
     })
     .catch((error) => {
-      console.error("Error during service worker registration:", error);
+      console.error("Error during service worker registration:", error); // tslint:disable-line
     });
 }
 
@@ -127,6 +128,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
       }
     })
     .catch(() => {
+      // tslint:disable
       console.log(
         "No internet connection found. App is running in offline mode."
       );
