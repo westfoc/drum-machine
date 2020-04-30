@@ -75,8 +75,20 @@ class InstrumentRow extends Component<InstrumentRowProps, InstrumentRowState> {
             height: "45px",
           }}
         >
-          <div>
-            <p>{title}</p>
+          <div
+            style={{
+              minWidth: "120px",
+              border: "1px solid #5c5c5c",
+              height: "40px",
+              borderRadius: "5px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#473d3d",
+              marginRight: "5px",
+            }}
+          >
+            <p style={{ fontSize: "14px" }}>{title}</p>
           </div>
           {this.renderRow()}{" "}
         </div>
