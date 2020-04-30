@@ -3,17 +3,28 @@ import InstrumentRow from "./instrument-row";
 
 interface DrumFaceProps {}
 
+interface InstrumentMeta {
+  title: string;
+}
+
 interface DrumFaceState {
-  numOfRows: ReadonlyArray<object>;
+  numOfRows: ReadonlyArray<InstrumentMeta>;
 }
 
 class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
   constructor(props: DrumFaceProps) {
     super(props);
     this.state = {
-      numOfRows: [{}, {}, {}, {}],
+      numOfRows: [
+        { title: "Kick" },
+        { title: "Clap" },
+        { title: "Hat" },
+        { title: "Snare" },
+      ],
     };
   }
+
+  
 
   render() {
     const { numOfRows } = this.state;
@@ -28,17 +39,20 @@ class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
       >
         <div
           style={{
-            width: "700px",
+            width: "750px",
             height: "300px",
-            border: "1px solid blue",
+            border: "1px solid darkgrey",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             paddingTop: "10px",
+            paddingLeft: "20px",
+            paddingRight: "20px",
+            backgroundColor: "#6e6e6e",
           }}
         >
-          {numOfRows.map((item: object, i: number) => (
-            <InstrumentRow key={`${item}row${i}`} />
+          {numOfRows.map((item: InstrumentMeta, i: number) => (
+            <InstrumentRow title={item.title} key={`${item}row${i}`} />
           ))}
         </div>
       </div>

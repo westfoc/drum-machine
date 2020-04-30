@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import RowItem from "./row-item";
 
-class InstrumentRow extends Component {
-  constructor(props: any) {
+interface InstrumentRowProps {
+  title: string;
+}
+
+interface InstrumentRowState {}
+
+class InstrumentRow extends Component<InstrumentRowProps, InstrumentRowState> {
+  constructor(props: InstrumentRowProps) {
     super(props);
     this.state = {};
   }
@@ -29,12 +36,12 @@ class InstrumentRow extends Component {
     return genArray.map((item: object, i: number) => {
       const backgroundColor: React.CSSProperties =
         i < 4 || (i > 7 && i < 12)
-          ? { backgroundColor: "blue" }
-          : { backgroundColor: "red" };
+          ? { backgroundColor: "#473d3d" }
+          : { backgroundColor: "#6b2b2b" };
       return (
-        <div
+        <RowItem
           style={{
-            width: "40px",
+            width: "30px",
             height: "40px",
             marginRight: "5px",
             marginLeft: "5px",
@@ -50,11 +57,29 @@ class InstrumentRow extends Component {
   };
 
   render(): JSX.Element {
+    const { title } = this.props;
     return (
       <div
-        style={{ display: "flex", flexDirection: "row", marginBottom: "10px" }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginBottom: "10px",
+          justifyContent: "center",
+        }}
       >
-        {this.renderRow()}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            height: "45px",
+          }}
+        >
+          <div>
+            <p>{title}</p>
+          </div>
+          {this.renderRow()}{" "}
+        </div>
       </div>
     );
   }

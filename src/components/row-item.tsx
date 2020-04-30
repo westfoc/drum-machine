@@ -1,7 +1,12 @@
 import React from "react";
 
-function RowItem() {
-  return <div />;
+interface RowItemProps {
+  style: React.CSSProperties;
+}
+
+function RowItem(props: RowItemProps) {
+  const { style } = props;
+  return <div style={style} />;
 }
 
 export default RowItem;

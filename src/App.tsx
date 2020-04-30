@@ -1,5 +1,5 @@
 import React from "react";
-import DrumFace from "./components/DrumFace";
+import DrumFace from "./components/drum-face";
 import "./App.css";
 
 function App() {
