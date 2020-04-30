@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function RowItem() {
-    return <div />
+  return <div />;
 }
 
-export default RowItem
+export default RowItem;

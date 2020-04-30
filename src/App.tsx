@@ -1,6 +1,6 @@
-import React from 'react';
-import DrumFace from './components/DrumFace';
-import './App.css';
+import React from "react";
+import DrumFace from "./components/DrumFace";
+import "./App.css";
 
 function App() {
   return (
