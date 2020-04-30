@@ -49,6 +49,7 @@ class InstrumentRow extends Component<InstrumentRowProps, InstrumentRowState> {
             borderRadius: "5px",
             marginBottom: "5px",
             marginTop: "5px",
+            cursor: "pointer",
           }}
           key={`${item}${i}`}
         />
