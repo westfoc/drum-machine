@@ -30,6 +30,7 @@ class InstrumentRow extends Component<InstrumentRowProps> {
             cursor: "pointer",
           }}
           key={`${beat.id}`}
+          id={beat.id}
         />
       );
     });

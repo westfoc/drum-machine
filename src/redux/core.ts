@@ -21,7 +21,7 @@ const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
 
 const createdBeats = (): Beats => {
   return Array.from(new Array(15), (val, index) => ({
-    id: `${index}${val}`,
+    id: `beat-${index}`,
     on: false,
   }));
 };
