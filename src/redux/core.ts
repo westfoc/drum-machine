@@ -2,9 +2,9 @@ interface Beat {
   on: boolean;
 }
 
-type Beats = ReadonlyArray<Beat>;
+export type Beats = ReadonlyArray<Beat>;
 
-interface Instrument {
+export interface Instrument {
   title: string;
   file: string;
   beats: Beats;
@@ -33,10 +33,10 @@ const beats: Beats = [
   beat,
 ];
 
-type Instruments = ReadonlyArray<Instrument>;
+export type Instruments = ReadonlyArray<Instrument>;
 
 export interface AppState {
-  Instruments: ReadonlyArray<Instrument>;
+  instruments: ReadonlyArray<Instrument>;
 }
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
@@ -50,7 +50,7 @@ const initialInstruments: Instruments = titles.map((title: string) => {
 });
 
 const AppStateRecord = {
-  Instruments: initialInstruments,
+  instruments: initialInstruments,
 };
 
 export const INITIAL_STATE: AppState = AppStateRecord;
