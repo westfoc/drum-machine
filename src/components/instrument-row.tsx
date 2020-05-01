@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import RowItem from "./row-item";
 import { Beats, Beat } from "../redux/core";
+import { SelectBeatParams } from "../redux/action_creators";
 
 interface InstrumentRowProps {
   title: string;
   beats: Beats;
+  selectBeatAction: (params: SelectBeatParams) => void;
 }
 
 class InstrumentRow extends Component<InstrumentRowProps> {
   renderRow = (): JSX.Element[] => {
-    const { beats } = this.props;
+    const { beats, title, selectBeatAction } = this.props;
 
     return beats.map((beat: Beat, i: number) => {
       const backgroundColor: React.CSSProperties =
@@ -30,7 +32,10 @@ class InstrumentRow extends Component<InstrumentRowProps> {
             cursor: "pointer",
           }}
           key={`${beat.id}`}
+          on={beat.on}
           id={beat.id}
+          title={title}
+          selectBeatAction={selectBeatAction}
         />
       );
     });
