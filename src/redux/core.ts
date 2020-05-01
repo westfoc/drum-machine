@@ -20,7 +20,7 @@ export interface AppState {
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
 
 const createdBeats = (): Beats => {
-  return Array.from(new Array(15), (val, index) => ({
+  return Array.from({ length: 16 }, (val, index) => ({
     id: `beat-${index}`,
     on: false,
   }));
