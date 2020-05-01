@@ -5,9 +5,7 @@ interface InstrumentRowProps {
   title: string;
 }
 
-interface InstrumentRowState {}
-
-class InstrumentRow extends Component<InstrumentRowProps, InstrumentRowState> {
+class InstrumentRow extends Component<InstrumentRowProps> {
   constructor(props: InstrumentRowProps) {
     super(props);
     this.state = {};
