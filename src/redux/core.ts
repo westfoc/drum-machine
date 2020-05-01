@@ -11,28 +11,38 @@ export interface Instrument {
   beats: Beats;
 }
 
-export type Instruments = ReadonlyArray<Instrument>;
+export interface Instruments {
+  [title: string]: Instrument;
+}
 
 export interface AppState {
-  instruments: ReadonlyArray<Instrument>;
+  instruments: Instruments;
 }
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
 
 const createdBeats = (): Beats => {
-  return Array.from({ length: 16 }, (val, index) => ({
-    id: `beat-${index}`,
-    on: false,
-  }));
+  return Array.from({ length: 16 }, (val, index) => {
+    return {
+      id: index.toString(),
+      on: false,
+    };
+  });
 };
 
-const initialInstruments: Instruments = titles.map((title: string) => {
-  return {
-    title,
-    file: "",
-    beats: createdBeats(),
-  };
-});
+const initialInstruments: Instruments = titles.reduce(
+  (acc: Instruments, title: string) => {
+    return {
+      ...acc,
+      [title]: {
+        title,
+        file: "",
+        beats: createdBeats(),
+      },
+    };
+  },
+  {}
+);
 
 const AppStateRecord = {
   instruments: initialInstruments,
