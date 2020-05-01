@@ -1,33 +1,20 @@
 import React, { Component } from "react";
 import InstrumentRow from "./instrument-row";
+import { Instrument, Instruments } from "../redux/core";
 
-interface DrumFaceProps {}
-
-interface InstrumentMeta {
-  title: string;
+interface DrumFaceProps {
+  instruments: Instruments;
 }
 
-interface DrumFaceState {
-  numOfRows: ReadonlyArray<InstrumentMeta>;
-}
-
-class DrumFace extends Component<DrumFaceProps, DrumFaceState> {
-  constructor(props: DrumFaceProps) {
-    super(props);
-    this.state = {
-      numOfRows: [
-        { title: "Kick" },
-        { title: "Clap" },
-        { title: "Hat" },
-        { title: "Snare" },
-      ],
-    };
-  }
-
+class DrumFace extends Component<DrumFaceProps> {
   renderRows = (): JSX.Element[] => {
-    const { numOfRows }: DrumFaceState = this.state;
-    return numOfRows.map((item: InstrumentMeta, i: number) => (
-      <InstrumentRow title={item.title} key={`${item}row${i}`} />
+    const { instruments } = this.props;
+    return instruments.map((instrument: Instrument, i: number) => (
+      <InstrumentRow
+        title={instrument.title}
+        beats={instrument.beats}
+        key={`${instrument.title}row${i}`}
+      />
     ));
   };
 

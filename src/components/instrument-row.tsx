@@ -1,37 +1,17 @@
 import React, { Component } from "react";
 import RowItem from "./row-item";
+import { Beats } from "../redux/core";
 
 interface InstrumentRowProps {
   title: string;
+  beats: Beats;
 }
 
 class InstrumentRow extends Component<InstrumentRowProps> {
-  constructor(props: InstrumentRowProps) {
-    super(props);
-    this.state = {};
-  }
-
   renderRow = (): JSX.Element[] => {
-    const genArray: ReadonlyArray<object> = [
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-    ];
+    const { beats } = this.props;
 
-    return genArray.map((item: object, i: number) => {
+    return beats.map((item: object, i: number) => {
       const backgroundColor: React.CSSProperties =
         i < 4 || (i > 7 && i < 12)
           ? { backgroundColor: "#473d3d" }

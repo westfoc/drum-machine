@@ -1,15 +1,12 @@
 import React from "react";
-import DrumFace from "./components/drum-face";
-import "./App.css";
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import DrumFaceContainer from "./components/drum-face-container";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Drum machine</p>
-        <DrumFace />
-      </header>
-    </div>
+    <Provider store={store}>
+      <DrumFaceContainer />
+    </Provider>
   );
 }
 
