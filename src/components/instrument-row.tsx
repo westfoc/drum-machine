@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RowItem from "./row-item";
-import { Beats } from "../redux/core";
+import { Beats, Beat } from "../redux/core";
 
 interface InstrumentRowProps {
   title: string;
@@ -11,7 +11,7 @@ class InstrumentRow extends Component<InstrumentRowProps> {
   renderRow = (): JSX.Element[] => {
     const { beats } = this.props;
 
-    return beats.map((item: object, i: number) => {
+    return beats.map((beat: Beat, i: number) => {
       const backgroundColor: React.CSSProperties =
         i < 4 || (i > 7 && i < 12)
           ? { backgroundColor: "#473d3d" }
@@ -29,7 +29,7 @@ class InstrumentRow extends Component<InstrumentRowProps> {
             marginTop: "5px",
             cursor: "pointer",
           }}
-          key={`${item}${i}`}
+          key={`${beat.id}`}
         />
       );
     });
