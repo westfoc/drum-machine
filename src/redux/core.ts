@@ -1,5 +1,6 @@
-interface Beat {
+export interface Beat {
   on: boolean;
+  id: string;
 }
 
 export type Beats = ReadonlyArray<Beat>;
@@ -10,29 +11,6 @@ export interface Instrument {
   beats: Beats;
 }
 
-const beat: Beat = {
-  on: false,
-};
-
-const beats: Beats = [
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-  beat,
-];
-
 export type Instruments = ReadonlyArray<Instrument>;
 
 export interface AppState {
@@ -41,11 +19,18 @@ export interface AppState {
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
 
+const createdBeats = (): Beats => {
+  return Array.from(new Array(15), (val, index) => ({
+    id: `${index}${val}`,
+    on: false,
+  }));
+};
+
 const initialInstruments: Instruments = titles.map((title: string) => {
   return {
     title,
     file: "",
-    beats,
+    beats: createdBeats(),
   };
 });
 
