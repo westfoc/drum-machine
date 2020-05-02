@@ -17,6 +17,7 @@ export interface Instruments {
 
 export interface AppState {
   instruments: Instruments;
+  isPlaying: boolean;
 }
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
@@ -46,6 +47,7 @@ const initialInstruments: Instruments = titles.reduce(
 
 const AppStateRecord = {
   instruments: initialInstruments,
+  isPlaying: false,
 };
 
 export const INITIAL_STATE: AppState = AppStateRecord;
