@@ -26,7 +26,6 @@ const DrumFaceContainer = (props: DrumFaceContainerProps) => {
     setToggleIsPlaying,
     isPlaying,
   } = props;
-  console.log(props); // tslint:disable-line
   return (
     <div className="App">
       <header className="App-header">
