@@ -15,9 +15,17 @@ export interface Instruments {
   [title: string]: Instrument;
 }
 
+export interface SelectBeatParams {
+  id: string;
+  title: string;
+  on: boolean;
+}
+
+export type IsPlaying = boolean;
+
 export interface AppState {
   instruments: Instruments;
-  isPlaying: boolean;
+  isPlaying: IsPlaying;
 }
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];

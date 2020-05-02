@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import InstrumentRow from "./instrument-row";
-import { Instruments } from "../redux/core";
-import { SelectBeatParams } from "../redux/action_creators";
+import { Instruments, SelectBeatParams } from "../redux/core";
 
 interface ChannelRackProps {
   instruments: Instruments;

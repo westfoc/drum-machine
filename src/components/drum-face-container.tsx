@@ -1,23 +1,40 @@
 import React from "react";
 import { connect } from "react-redux";
 import ChannelRack from "./channel-rack";
-import { AppState, Instruments } from "../redux/core";
-import { SelectBeatParams } from "../redux/action_creators";
+import TransportControls from "./transport-controls";
+import {
+  AppState,
+  Instruments,
+  SelectBeatParams,
+  IsPlaying,
+} from "../redux/core";
 import * as actionCreators from "../redux/action_creators";
 
 import "../App.css";
 
 interface DrumFaceContainerProps {
   instruments: Instruments;
+  isPlaying: IsPlaying;
   selectBeatAction: (params: SelectBeatParams) => void;
+  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
 }
 
-function DrumFaceContainer(props: DrumFaceContainerProps) {
-  const { instruments, selectBeatAction } = props;
+const DrumFaceContainer = (props: DrumFaceContainerProps) => {
+  const {
+    instruments,
+    selectBeatAction,
+    setToggleIsPlaying,
+    isPlaying,
+  } = props;
+  console.log(props); // tslint:disable-line
   return (
     <div className="App">
       <header className="App-header">
         <p>Drum machine</p>
+        <TransportControls
+          isPlaying={isPlaying}
+          setToggleIsPlaying={setToggleIsPlaying}
+        />
         <ChannelRack
           instruments={instruments}
           selectBeatAction={selectBeatAction}
@@ -25,10 +42,10 @@ function DrumFaceContainer(props: DrumFaceContainerProps) {
       </header>
     </div>
   );
-}
+};
 
-function mapStateToProps(state: AppState) {
+const mapStateToProps = (state: AppState) => {
   return state;
-}
+};
 
 export default connect(mapStateToProps, actionCreators)(DrumFaceContainer);

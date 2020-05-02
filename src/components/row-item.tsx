@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectBeatParams } from "../redux/action_creators";
+import { SelectBeatParams } from "../redux/core";
 
 interface RowItemProps {
   style: React.CSSProperties;

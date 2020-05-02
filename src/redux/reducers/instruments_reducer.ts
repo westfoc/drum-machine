@@ -1,9 +1,5 @@
-import { INITIAL_STATE, Instruments } from "../core";
-import {
-  SET_SELECT_BEAT,
-  SelectBeatParams,
-  InstrumentActionTypes,
-} from "../action_creators";
+import { INITIAL_STATE, Instruments, SelectBeatParams } from "../core";
+import { SET_SELECT_BEAT, DrumMachineActionTypes } from "../action_creators";
 
 function setBeats(state: Instruments, params: SelectBeatParams) {
   const newState = {
@@ -22,7 +18,7 @@ function setBeats(state: Instruments, params: SelectBeatParams) {
 
 function instruments(
   state: Instruments = INITIAL_STATE.instruments,
-  action: InstrumentActionTypes
+  action: DrumMachineActionTypes
 ) {
   switch (action.type) {
     case SET_SELECT_BEAT:

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import RowItem from "./row-item";
-import { Beats, Beat } from "../redux/core";
-import { SelectBeatParams } from "../redux/action_creators";
+import { Beats, Beat, SelectBeatParams } from "../redux/core";
 
 interface InstrumentRowProps {
   title: string;
