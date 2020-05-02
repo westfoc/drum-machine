@@ -3,12 +3,12 @@ import InstrumentRow from "./instrument-row";
 import { Instruments } from "../redux/core";
 import { SelectBeatParams } from "../redux/action_creators";
 
-interface DrumFaceProps {
+interface ChannelRackProps {
   instruments: Instruments;
   selectBeatAction: (params: SelectBeatParams) => void;
 }
 
-class DrumFace extends Component<DrumFaceProps> {
+class ChannelRack extends Component<ChannelRackProps> {
   renderRows = (): JSX.Element[] => {
     const { instruments, selectBeatAction } = this.props;
     return Object.keys(instruments).map((instrument: string, i: number) => {
@@ -54,4 +54,4 @@ class DrumFace extends Component<DrumFaceProps> {
   }
 }
 
-export default DrumFace;
+export default ChannelRack;

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import DrumFace from "./drum-face";
+import ChannelRack from "./channel-rack";
 import { AppState, Instruments } from "../redux/core";
 import { SelectBeatParams } from "../redux/action_creators";
 import * as actionCreators from "../redux/action_creators";
@@ -18,7 +18,7 @@ function DrumFaceContainer(props: DrumFaceContainerProps) {
     <div className="App">
       <header className="App-header">
         <p>Drum machine</p>
-        <DrumFace
+        <ChannelRack
           instruments={instruments}
           selectBeatAction={selectBeatAction}
         />
