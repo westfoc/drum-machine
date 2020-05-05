@@ -12,9 +12,11 @@ export const getFile = async (
   audioContext: AudioContext,
   filepath: string
 ): Promise<AudioBuffer> => {
-  const response = await fetch(filepath);
-  const arrayBuffer = await response.arrayBuffer();
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  const response: Response = await fetch(filepath);
+  const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
+  const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(
+    arrayBuffer
+  );
   return audioBuffer;
 };
 
@@ -22,7 +24,7 @@ export const setupSample = async (
   audioContext: AudioContext,
   filepath: string
 ): Promise<AudioBuffer> => {
-  const sample = await getFile(audioContext, filepath);
+  const sample: AudioBuffer = await getFile(audioContext, filepath);
   return sample;
 };
 
@@ -30,9 +32,24 @@ export const playSample = (
   audioContext: AudioContext,
   audioBuffer: AudioBuffer
 ): AudioBufferSourceNode => {
-  const sampleSource = audioContext.createBufferSource();
+  const sampleSource: AudioBufferSourceNode = audioContext.createBufferSource();
   sampleSource.buffer = audioBuffer;
   sampleSource.connect(audioContext.destination);
   sampleSource.start();
   return sampleSource;
+};
+
+export const nextNote = (
+  tempo: number,
+  currentNote: number,
+  nextNoteTime: number
+) => {
+  const secondsPerBeat: number = 60.0 / tempo;
+  nextNoteTime += secondsPerBeat; // Add beat length to last beat time
+
+  // Advance the beat number and wrap beat to zero
+  currentNote++;
+  if (currentNote === 16) {
+    currentNote = 0;
+  }
 };
