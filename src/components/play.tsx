@@ -2,17 +2,16 @@ import React from "react";
 import { IsPlaying } from "../redux/core";
 
 interface PlayProps {
-  isPlaying: boolean;
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+  handleStartPlayback: () => void;
+  isPlaying: IsPlaying;
 }
 
-const handleSetToggleIsPlaying = (
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void,
-  isPlaying: IsPlaying
-): void => setToggleIsPlaying(!isPlaying);
+const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
+  handleStartPlayback();
+};
 
 const Play = (props: PlayProps) => {
-  const { isPlaying, setToggleIsPlaying } = props;
+  const { handleStartPlayback, isPlaying } = props;
   return (
     <div
       style={{
@@ -25,7 +24,7 @@ const Play = (props: PlayProps) => {
         alignItems: "center",
         cursor: "pointer",
       }}
-      onClick={() => handleSetToggleIsPlaying(setToggleIsPlaying, isPlaying)}
+      onClick={() => handleSetToggleIsPlaying(handleStartPlayback)}
     >
       {!isPlaying ? (
         <div

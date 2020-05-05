@@ -8,7 +8,7 @@ import {
   SelectBeatParams,
   IsPlaying,
 } from "../redux/core";
-import * as actionCreators from "../redux/action_creators";
+import * as actionCreators from "../redux/action-creators";
 
 import "../App.css";
 
@@ -17,6 +17,7 @@ interface DrumFaceContainerProps {
   isPlaying: IsPlaying;
   selectBeatAction: (params: SelectBeatParams) => void;
   setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+  handleStartPlayback: () => void;
 }
 
 const DrumFaceContainer = (props: DrumFaceContainerProps) => {
@@ -25,6 +26,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps) => {
     selectBeatAction,
     setToggleIsPlaying,
     isPlaying,
+    handleStartPlayback,
   } = props;
   return (
     <div className="App">
@@ -33,6 +35,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps) => {
         <TransportControls
           isPlaying={isPlaying}
           setToggleIsPlaying={setToggleIsPlaying}
+          handleStartPlayback={handleStartPlayback}
         />
         <ChannelRack
           instruments={instruments}

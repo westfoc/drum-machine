@@ -1,6 +1,17 @@
 import React from "react";
+import { IsPlaying } from "../redux/core";
 
-const Play = () => {
+interface StopProps {
+  isPlaying: boolean;
+  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+}
+
+const handleStopIsPlaying = (
+  setToggleIsPlaying: (isPlaying: IsPlaying) => void
+) => setToggleIsPlaying(false);
+
+const Stop = (props: StopProps) => {
+  const { setToggleIsPlaying } = props;
   return (
     <div
       style={{
@@ -12,6 +23,7 @@ const Play = () => {
         alignItems: "center",
         cursor: "pointer",
       }}
+      onClick={() => handleStopIsPlaying(setToggleIsPlaying)}
     >
       <div
         style={{
@@ -24,4 +36,4 @@ const Play = () => {
   );
 };
 
-export default Play;
+export default Stop;
