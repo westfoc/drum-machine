@@ -2,7 +2,7 @@ import { INITIAL_STATE, IsPlaying } from "../core";
 import {
   SET_TOGGLE_IS_PLAYING,
   DrumMachineActionTypes,
-} from "../action_creators";
+} from "../action-creators";
 
 function setToggleIsPlaying(isPlaying: IsPlaying) {
   return isPlaying;

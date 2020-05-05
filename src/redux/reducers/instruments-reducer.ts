@@ -1,5 +1,5 @@
 import { INITIAL_STATE, Instruments, SelectBeatParams } from "../core";
-import { SET_SELECT_BEAT, DrumMachineActionTypes } from "../action_creators";
+import { SET_SELECT_BEAT, DrumMachineActionTypes } from "../action-creators";
 
 function setBeats(state: Instruments, params: SelectBeatParams) {
   const newState = {

@@ -1,6 +1,15 @@
-import { createStore } from "redux";
-import rootReducer from "./reducers/root_reducer";
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { call } from "redux-saga/effects";
+import rootReducer from "./reducers/root-reducer";
+import { sagas } from "./sagas/root-saga";
 
-const store = createStore(rootReducer);
+function* sagaRoot() {
+  yield call(sagas);
+}
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(sagaRoot);
 
 export default store;

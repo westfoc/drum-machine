@@ -6,10 +6,11 @@ import Stop from "./stop";
 interface TransportControlsProps {
   isPlaying: boolean;
   setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+  handleStartPlayback: () => void;
 }
 
 const TransportControls = (props: TransportControlsProps) => {
-  const { setToggleIsPlaying, isPlaying } = props;
+  const { setToggleIsPlaying, isPlaying, handleStartPlayback } = props;
   return (
     <div
       style={{
@@ -31,8 +32,8 @@ const TransportControls = (props: TransportControlsProps) => {
           borderRadius: "5px",
         }}
       >
-        <Play isPlaying={isPlaying} setToggleIsPlaying={setToggleIsPlaying} />
-        <Stop />
+        <Play handleStartPlayback={handleStartPlayback} isPlaying={isPlaying} />
+        <Stop isPlaying={isPlaying} setToggleIsPlaying={setToggleIsPlaying} />
       </div>
     </div>
   );
