@@ -32,7 +32,7 @@ const TransportControls = (props: TransportControlsProps) => {
           borderRadius: "5px",
         }}
       >
-        <Play handleStartPlayback={handleStartPlayback} isPlaying={isPlaying} />
+        <Play isPlaying={isPlaying} handleStartPlayback={handleStartPlayback} />
         <Stop isPlaying={isPlaying} setToggleIsPlaying={setToggleIsPlaying} />
       </div>
     </div>

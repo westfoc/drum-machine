@@ -1,3 +1,5 @@
+import { Beat, Beats } from "../redux/core";
+
 export const createAudioContext = (): AudioContext | undefined => {
   try {
     const AudioContext = window.AudioContext;
@@ -43,7 +45,7 @@ export const nextNote = (
   tempo: number,
   currentNote: number,
   nextNoteTime: number
-) => {
+): void => {
   const secondsPerBeat: number = 60.0 / tempo;
   nextNoteTime += secondsPerBeat; // Add beat length to last beat time
 
@@ -52,4 +54,21 @@ export const nextNote = (
   if (currentNote === 16) {
     currentNote = 0;
   }
+};
+
+export const scheduleNote = (
+  beatNumber: number,
+  time: number,
+  beats: Beats,
+  playFunction: () => void
+): void => {
+  const notesInQueue = [];
+
+  notesInQueue.push({ note: beatNumber, time });
+
+  beats.forEach((beat: Beat) => {
+    if (beat.on) {
+      playFunction();
+    }
+  });
 };
