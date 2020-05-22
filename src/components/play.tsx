@@ -13,7 +13,7 @@ const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
 const Play = (props: PlayProps) => {
   const { handleStartPlayback, isPlaying } = props;
   return (
-    <div
+    <button
       style={{
         width: "87.5px",
         height: "60px",
@@ -62,7 +62,7 @@ const Play = (props: PlayProps) => {
           />
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
