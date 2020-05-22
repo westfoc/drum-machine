@@ -1,44 +1,20 @@
 import { Beat, Beats } from "../redux/core";
+import * as Tone from "tone";
 
-export const createAudioContext = (): AudioContext | undefined => {
-  try {
-    const AudioContext = window.AudioContext;
-    const audioContext = new AudioContext();
-    return audioContext;
-  } catch (e) {
-    console.log(`Web Audio API is not supported in this browser: ${e}`); // tslint:disable-line
+export interface Player {
+  start: () => void;
+  dispose: () => void;
+}
+
+export const setupSound = (url: string): Player => {
+  const player = new Tone.Player(url).toMaster();
+  return player;
+};
+
+export const playSound = (player: Player | null) => {
+  if (player) {
+    player.start();
   }
-};
-
-export const getFile = async (
-  audioContext: AudioContext,
-  filepath: string
-): Promise<AudioBuffer> => {
-  const response: Response = await fetch(filepath);
-  const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
-  const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(
-    arrayBuffer
-  );
-  return audioBuffer;
-};
-
-export const setupSample = async (
-  audioContext: AudioContext,
-  filepath: string
-): Promise<AudioBuffer> => {
-  const sample: AudioBuffer = await getFile(audioContext, filepath);
-  return sample;
-};
-
-export const playSample = (
-  audioContext: AudioContext,
-  audioBuffer: AudioBuffer
-): AudioBufferSourceNode => {
-  const sampleSource: AudioBufferSourceNode = audioContext.createBufferSource();
-  sampleSource.buffer = audioBuffer;
-  sampleSource.connect(audioContext.destination);
-  sampleSource.start();
-  return sampleSource;
 };
 
 export const nextNote = (
