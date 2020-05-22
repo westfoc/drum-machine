@@ -1,5 +1,5 @@
 import { takeEvery } from "redux-saga/effects";
-import { handleStartPlayback } from "./playback_sagas";
+import { handleStartPlayback } from "./playback-sagas";
 
 export function* sagas() {
   return [
