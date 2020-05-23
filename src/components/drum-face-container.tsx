@@ -11,12 +11,14 @@ import {
 } from "../redux/core";
 import * as actionCreators from "../redux/action-creators";
 
+const DRUM_MACHINE_TEXT: string = "Drum machine";
+
 interface DrumFaceContainerProps {
   instruments: Instruments;
   isPlaying: IsPlaying;
   selectBeatAction: (params: SelectBeatParams) => void;
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
   handleStartPlayback: () => void;
+  handleStopPlayback: () => void;
 }
 
 const appContainer: SerializedStyles = css`
@@ -44,18 +46,18 @@ const DrumFaceContainer = (props: DrumFaceContainerProps) => {
   const {
     instruments,
     selectBeatAction,
-    setToggleIsPlaying,
     isPlaying,
     handleStartPlayback,
+    handleStopPlayback,
   } = props;
   return (
     <div css={appContainer}>
       <header css={appHeader}>
-        <p>Drum machine</p>
+        <p>{DRUM_MACHINE_TEXT}</p>
         <TransportControls
           isPlaying={isPlaying}
-          setToggleIsPlaying={setToggleIsPlaying}
           handleStartPlayback={handleStartPlayback}
+          handleStopPlayback={handleStopPlayback}
         />
         <ChannelRack
           instruments={instruments}
