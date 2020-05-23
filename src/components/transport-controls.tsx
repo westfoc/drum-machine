@@ -33,7 +33,7 @@ const TransportControls = (props: TransportControlsProps) => {
         }}
       >
         <Play isPlaying={isPlaying} handleStartPlayback={handleStartPlayback} />
-        <Stop isPlaying={isPlaying} handleStartPlayback={handleStartPlayback} />
+        <Stop handleStartPlayback={handleStartPlayback} />
       </div>
     </div>
   );

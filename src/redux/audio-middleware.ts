@@ -1,8 +1,5 @@
 import {
-  setupSound,
   setupDrumKit,
-  setupLoop,
-  Player,
   transportStart,
   transportStop,
   unlockTone,

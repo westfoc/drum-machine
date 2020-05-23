@@ -1,8 +1,6 @@
 import React from "react";
-import { IsPlaying } from "../redux/core";
 
 interface StopProps {
-  isPlaying: boolean;
   handleStartPlayback: () => void;
 }
 

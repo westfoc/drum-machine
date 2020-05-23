@@ -1,8 +1,8 @@
 import { put, select, call } from "redux-saga/effects";
 import { Instruments } from "../../redux/core";
 import * as actions from "../action-creators";
-import { getIsPlaying, getBeats, getInstruments } from "../selectors";
-import { createDrumPattern, createDrumPatterns } from "../../utils/audio-utils";
+import { getIsPlaying, getInstruments } from "../selectors";
+import { createDrumPatterns } from "../../utils/audio-utils";
 
 export function* handleStartPlayback() {
   yield put(actions.unlockTone());
