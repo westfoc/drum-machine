@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+/** @jsx jsx */
+import { css, jsx, SerializedStyles } from "@emotion/core";
 import InstrumentRow from "./instrument-row";
 import { Instruments, SelectBeatParams } from "../redux/core";
 
@@ -7,9 +8,29 @@ interface ChannelRackProps {
   selectBeatAction: (params: SelectBeatParams) => void;
 }
 
-class ChannelRack extends Component<ChannelRackProps> {
-  renderRows = (): JSX.Element[] => {
-    const { instruments, selectBeatAction } = this.props;
+const transportContainer: SerializedStyles = css`
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+`;
+
+const transportContainerBackground: SerializedStyles = css`
+  width: 770px;
+  height: 300px;
+  border: 1px solid darkgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #6e6e6e;
+`;
+
+const ChannelRack = (props: ChannelRackProps): JSX.Element => {
+  const renderRows = (): JSX.Element[] => {
+    const { instruments, selectBeatAction } = props;
+
     return Object.keys(instruments).map((instrument: string, i: number) => {
       const instrumentRow = instruments[instrument];
       return (
@@ -23,34 +44,11 @@ class ChannelRack extends Component<ChannelRackProps> {
     });
   };
 
-  render() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "770px",
-            height: "300px",
-            border: "1px solid darkgrey",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            paddingTop: "10px",
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            backgroundColor: "#6e6e6e",
-          }}
-        >
-          {this.renderRows()}
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <div css={transportContainer}>
+      <div css={transportContainerBackground}>{renderRows()}</div>
+    </div>
+  );
+};
 
 export default ChannelRack;

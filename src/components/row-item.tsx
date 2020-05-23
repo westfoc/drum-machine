@@ -1,29 +1,30 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, SerializedStyles } from "@emotion/core";
 import { SelectBeatParams } from "../redux/core";
 
 interface RowItemProps {
-  style: React.CSSProperties;
+  cssProp: SerializedStyles[];
   on: boolean;
   id: string;
   title: string;
   selectBeatAction: (params: SelectBeatParams) => void;
 }
 
-function selectBeat(
+const selectBeat = (
   params: SelectBeatParams,
   selectBeatAction: (params: SelectBeatParams) => void
-) {
+) => {
   selectBeatAction(params);
-}
+};
 
-function RowItem(props: RowItemProps) {
-  const { style, on, id, title, selectBeatAction } = props;
+const RowItem = (props: RowItemProps) => {
+  const { cssProp, on, id, title, selectBeatAction } = props;
   return (
     <div
-      style={style}
+      css={cssProp}
       onClick={() => selectBeat({ id, title, on }, selectBeatAction)}
     />
   );
-}
+};
 
 export default RowItem;

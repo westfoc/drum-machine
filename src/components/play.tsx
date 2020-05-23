@@ -1,10 +1,44 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx, SerializedStyles } from "@emotion/core";
 import { IsPlaying } from "../redux/core";
 
 interface PlayProps {
   handleStartPlayback: () => void;
   isPlaying: IsPlaying;
 }
+
+const button: SerializedStyles = css`
+  width: 87.5px;
+  height: 60px;
+  border-right: 1px solid grey;
+  display: flex;
+  background-color: #473d3d;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const playIcon: SerializedStyles = css`
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 20px solid white;
+  border-bottom: 10px solid transparent;
+`;
+
+const pauseIcon: SerializedStyles = css`
+  width: 12px;
+  height: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const pauseIconBar: SerializedStyles = css`
+  width: 4px;
+  height: 15px;
+  background-color: white;
+`;
 
 const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
   handleStartPlayback();
@@ -14,54 +48,17 @@ const Play = (props: PlayProps) => {
   const { handleStartPlayback, isPlaying } = props;
   return (
     <button
-      style={{
-        width: "87.5px",
-        height: "60px",
-        borderRight: "1px solid grey",
-        display: "flex",
-        backgroundColor: "#473d3d",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
-      }}
+      css={button}
       onClick={() => {
         handleSetToggleIsPlaying(handleStartPlayback);
       }}
     >
       {!isPlaying ? (
-        <div
-          style={{
-            width: 0,
-            height: 0,
-            borderTop: "10px solid transparent",
-            borderLeft: "20px solid white",
-            borderBottom: "10px solid transparent",
-          }}
-        />
+        <div css={playIcon} />
       ) : (
-        <div
-          style={{
-            width: "12px",
-            height: "15px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              width: "4px",
-              height: "15px",
-              backgroundColor: "white",
-            }}
-          />
-          <div
-            style={{
-              width: "4px",
-              height: "15px",
-              backgroundColor: "white",
-            }}
-          />
+        <div css={pauseIcon}>
+          <div css={pauseIconBar} />
+          <div css={pauseIconBar} />
         </div>
       )}
     </button>

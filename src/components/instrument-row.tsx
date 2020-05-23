@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+/** @jsx jsx */
+import { css, jsx, SerializedStyles } from "@emotion/core";
+import { Component } from "react";
 import RowItem from "./row-item";
 import { Beats, Beat, SelectBeatParams } from "../redux/core";
 
@@ -8,9 +10,20 @@ interface InstrumentRowProps {
   selectBeatAction: (params: SelectBeatParams) => void;
 }
 
+const rowItemStyles: SerializedStyles = css`
+  width: 30px;
+  height: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+`;
+
 class InstrumentRow extends Component<InstrumentRowProps> {
-  genOnOffColor = (beatOn: boolean): React.CSSProperties => {
-    return beatOn ? { opacity: 0.4 } : { opacity: 1 };
+  genOnOffColor = (beatOn: boolean): number => {
+    return beatOn ? 0.4 : 1;
   };
 
   renderRow = (): JSX.Element[] => {
@@ -18,23 +31,20 @@ class InstrumentRow extends Component<InstrumentRowProps> {
 
     return beats.map((beat: Beat, i: number) => {
       const opacity = this.genOnOffColor(beat.on);
-      const backgroundColor: React.CSSProperties =
+      const backgroundColor: SerializedStyles =
         i < 4 || (i > 7 && i < 12)
-          ? { backgroundColor: "#473d3d", ...opacity }
-          : { backgroundColor: "#6b2b2b", ...opacity };
+          ? css`
+              background-color: #473d3d;
+              opacity: ${opacity};
+            `
+          : css`
+              background-color: #6b2b2b;
+              opacity: ${opacity};
+            `;
+      console.log(backgroundColor); // tslint:disable-line
       return (
         <RowItem
-          style={{
-            width: "30px",
-            height: "40px",
-            marginRight: "5px",
-            marginLeft: "5px",
-            ...backgroundColor,
-            borderRadius: "5px",
-            marginBottom: "5px",
-            marginTop: "5px",
-            cursor: "pointer",
-          }}
+          cssProp={[rowItemStyles, backgroundColor]}
           key={`${beat.id}`}
           on={beat.on}
           id={beat.id}
