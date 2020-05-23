@@ -10,7 +10,7 @@ interface TransportControlsProps {
 }
 
 const TransportControls = (props: TransportControlsProps) => {
-  const { setToggleIsPlaying, isPlaying, handleStartPlayback } = props;
+  const { isPlaying, handleStartPlayback } = props;
   return (
     <div
       style={{

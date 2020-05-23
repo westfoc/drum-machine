@@ -1,4 +1,4 @@
-import { IsPlaying, SelectBeatParams, DrumPattern } from "./core";
+import { IsPlaying, SelectBeatParams, DrumPatterns } from "./core";
 
 export const SET_SELECT_BEAT = "SET_SELECT_BEAT";
 export const SET_TOGGLE_IS_PLAYING = "SET_TOGGLE_IS_PLAYING";
@@ -27,7 +27,7 @@ interface UnlockToneAction {
 
 interface SetupLoopAction {
   type: typeof SETUP_LOOP;
-  drumPattern: DrumPattern;
+  drumPatterns: DrumPatterns;
 }
 
 interface StopSoundAction {
@@ -72,10 +72,10 @@ export const unlockTone = (): UnlockToneAction => {
   };
 };
 
-export const setupLoop = (drumPattern: DrumPattern): SetupLoopAction => {
+export const setupLoop = (drumPatterns: DrumPatterns): SetupLoopAction => {
   return {
     type: SETUP_LOOP,
-    drumPattern,
+    drumPatterns,
   };
 };
 

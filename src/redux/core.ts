@@ -7,6 +7,10 @@ export type Beats = ReadonlyArray<Beat>;
 
 export type DrumPattern = ReadonlyArray<ReadonlyArray<string>>;
 
+export type DrumPatterns = {
+  [key: string]: DrumPattern;
+};
+
 export interface Instrument {
   title: string;
   file: string;
@@ -30,7 +34,7 @@ export interface AppState {
   isPlaying: IsPlaying;
 }
 
-const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hat", "Snare"];
+const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hihat", "Snare"];
 
 const createdBeats = (): Beats => {
   return Array.from({ length: 16 }, (val, index) => {

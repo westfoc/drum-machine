@@ -1,4 +1,10 @@
-import { Beat, Beats, DrumPattern } from "../redux/core";
+import {
+  Beat,
+  Beats,
+  DrumPattern,
+  DrumPatterns,
+  Instruments,
+} from "../redux/core";
 import * as Tone from "tone";
 
 interface Context {
@@ -11,17 +17,37 @@ export interface Player {
   context: Context;
 }
 
+type Players = {
+  [title: string]: Player;
+} & {
+  get: (title: string) => Player;
+};
+
 export const unlockTone = () => Tone.start();
 
 export const createDrumPattern = (beats: Beats): DrumPattern => {
   return beats.reduce((acc: DrumPattern, beat: Beat): DrumPattern => {
     if (beat.on) {
       const test = [...acc, [`0:0:${beat.id}`]];
-      console.log(test); // tslint:disable-line
       return test;
     }
     return acc;
   }, []);
+};
+
+export const createDrumPatterns = (instruments: Instruments): DrumPatterns => {
+  return Object.keys(instruments).reduce(
+    (acc: DrumPatterns, instrument: string) => {
+      const drumPattern: DrumPattern = createDrumPattern(
+        instruments[instrument].beats
+      );
+      return {
+        ...acc,
+        [instrument]: drumPattern,
+      };
+    },
+    {}
+  );
 };
 
 export const setupSound = (url: string): Player => {
@@ -30,9 +56,25 @@ export const setupSound = (url: string): Player => {
   return player;
 };
 
+export const setupDrumKit = (kit: object) => {
+  const players = new Tone.Players(kit).toMaster();
+  return players;
+};
+
 export const playSound = (player: Player | null, time: number = 0) => {
   if (player) {
     player.start(time);
+  }
+};
+
+export const playSounds = (
+  players: Players,
+  drumPatterns: DrumPatterns
+): void => {
+  if (players) {
+    Object.keys(drumPatterns).forEach((player: string): void => {
+      setupLoop(players.get(player), drumPatterns[player]);
+    });
   }
 };
 
@@ -58,4 +100,5 @@ export const transportStart = () => {
 
 export const transportStop = () => {
   Tone.Transport.stop();
+  Tone.Transport.cancel();
 };

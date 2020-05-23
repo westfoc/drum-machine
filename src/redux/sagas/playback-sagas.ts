@@ -1,7 +1,8 @@
 import { put, select, call } from "redux-saga/effects";
+import { Instruments } from "../../redux/core";
 import * as actions from "../action-creators";
-import { getIsPlaying, getBeats } from "../selectors";
-import { createDrumPattern } from "../../utils/audio-utils";
+import { getIsPlaying, getBeats, getInstruments } from "../selectors";
+import { createDrumPattern, createDrumPatterns } from "../../utils/audio-utils";
 
 export function* handleStartPlayback() {
   yield put(actions.unlockTone());
@@ -9,11 +10,12 @@ export function* handleStartPlayback() {
   const isPlayingState = yield select(getIsPlaying);
   yield put(actions.setToggleIsPlaying(!isPlayingState));
 
+  const instruments: Instruments = yield select(getInstruments);
+  const drumPatterns = yield call(createDrumPatterns, instruments);
   const isCurrentPlayState = yield select(getIsPlaying);
+
   if (isCurrentPlayState) {
-    const kickBeats = yield select(getBeats, "Kick");
-    const kickDrumPattern = yield call(createDrumPattern, kickBeats);
-    yield put(actions.setupLoop(kickDrumPattern));
+    yield put(actions.setupLoop(drumPatterns));
     yield put(actions.playSound());
   } else {
     yield put(actions.stopSound());
