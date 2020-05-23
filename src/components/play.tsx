@@ -24,7 +24,9 @@ const Play = (props: PlayProps) => {
         alignItems: "center",
         cursor: "pointer",
       }}
-      onClick={() => handleSetToggleIsPlaying(handleStartPlayback)}
+      onClick={() => {
+        handleSetToggleIsPlaying(handleStartPlayback);
+      }}
     >
       {!isPlaying ? (
         <div

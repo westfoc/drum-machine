@@ -3,17 +3,17 @@ import { IsPlaying } from "../redux/core";
 
 interface StopProps {
   isPlaying: boolean;
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+  handleStartPlayback: () => void;
 }
 
-const handleStopIsPlaying = (
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void
-) => setToggleIsPlaying(false);
+const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
+  handleStartPlayback();
+};
 
 const Stop = (props: StopProps) => {
-  const { setToggleIsPlaying } = props;
+  const { handleStartPlayback } = props;
   return (
-    <div
+    <button
       style={{
         width: "87.5px",
         height: "60px",
@@ -23,7 +23,7 @@ const Stop = (props: StopProps) => {
         alignItems: "center",
         cursor: "pointer",
       }}
-      onClick={() => handleStopIsPlaying(setToggleIsPlaying)}
+      onClick={() => handleSetToggleIsPlaying(handleStartPlayback)}
     >
       <div
         style={{
@@ -32,7 +32,7 @@ const Stop = (props: StopProps) => {
           backgroundColor: "white",
         }}
       />
-    </div>
+    </button>
   );
 };
 
