@@ -1,7 +1,10 @@
 import { INITIAL_STATE, Instruments, SelectBeatParams } from "../core";
 import { SET_SELECT_BEAT, DrumMachineActionTypes } from "../action-creators";
 
-function setBeats(state: Instruments, params: SelectBeatParams) {
+const setBeats = (
+  state: Instruments,
+  params: SelectBeatParams
+): Instruments => {
   const newState = {
     ...state,
     [params.title]: {
@@ -14,18 +17,18 @@ function setBeats(state: Instruments, params: SelectBeatParams) {
     },
   };
   return newState;
-}
+};
 
-function instruments(
+const instruments = (
   state: Instruments = INITIAL_STATE.instruments,
   action: DrumMachineActionTypes
-) {
+): Instruments => {
   switch (action.type) {
     case SET_SELECT_BEAT:
       return setBeats(state, action.params);
     default:
       return state;
   }
-}
+};
 
 export default instruments;

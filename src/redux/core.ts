@@ -11,6 +11,10 @@ export type DrumPatterns = {
   [key: string]: DrumPattern;
 };
 
+export type Drumkit = {
+  [key: string]: string;
+};
+
 export interface Instrument {
   title: string;
   file: string;
@@ -36,6 +40,22 @@ export interface AppState {
 
 const titles: ReadonlyArray<string> = ["Kick", "Clap", "Hihat", "Snare"];
 
+export interface Context {
+  resume: () => Promise<never>;
+}
+
+export interface Player {
+  start: (time: number) => void;
+  dispose: () => void;
+  context: Context;
+}
+
+export type Players = {
+  [title: string]: Player;
+} & {
+  get: (title: string) => Player;
+};
+
 const createdBeats = (): Beats => {
   return Array.from({ length: 16 }, (val, index) => {
     return {
@@ -59,7 +79,7 @@ const initialInstruments: Instruments = titles.reduce(
   {}
 );
 
-const AppStateRecord = {
+const AppStateRecord: AppState = {
   instruments: initialInstruments,
   isPlaying: false,
 };

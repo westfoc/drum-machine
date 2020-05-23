@@ -4,20 +4,20 @@ import {
   DrumMachineActionTypes,
 } from "../action-creators";
 
-function setToggleIsPlaying(isPlaying: IsPlaying) {
+const setToggleIsPlaying = (isPlaying: IsPlaying): IsPlaying => {
   return isPlaying;
-}
+};
 
-function playback(
+const playback = (
   state: IsPlaying = INITIAL_STATE.isPlaying,
   action: DrumMachineActionTypes
-) {
+): IsPlaying => {
   switch (action.type) {
     case SET_TOGGLE_IS_PLAYING:
       return setToggleIsPlaying(action.isPlaying);
     default:
       return state;
   }
-}
+};
 
 export default playback;

@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, Middleware, Store } from "redux";
-import createSagaMiddleware, { SagaMiddleware } from "redux-saga";
+import createSagaMiddleware, { SagaMiddleware, SagaIterator } from "redux-saga";
 import { call } from "redux-saga/effects";
 import rootReducer from "./reducers/root-reducer";
 import { sagas } from "./sagas/root-saga";
 import { audioMiddleware } from "./audio-middleware";
 
-function* sagaRoot() {
+function* sagaRoot(): SagaIterator {
   yield call(sagas);
 }
 

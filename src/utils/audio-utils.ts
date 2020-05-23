@@ -4,26 +4,12 @@ import {
   DrumPattern,
   DrumPatterns,
   Instruments,
+  Player,
+  Players,
 } from "../redux/core";
 import * as Tone from "tone";
 
-interface Context {
-  resume: () => Promise<never>;
-}
-
-export interface Player {
-  start: (time: number) => void;
-  dispose: () => void;
-  context: Context;
-}
-
-type Players = {
-  [title: string]: Player;
-} & {
-  get: (title: string) => Player;
-};
-
-export const unlockTone = () => Tone.start();
+export const unlockTone = (): void => Tone.start();
 
 export const createDrumPattern = (beats: Beats): DrumPattern => {
   return beats.reduce((acc: DrumPattern, beat: Beat): DrumPattern => {
@@ -56,12 +42,12 @@ export const setupSound = (url: string): Player => {
   return player;
 };
 
-export const setupDrumKit = (kit: object) => {
+export const setupDrumKit = (kit: object): Players => {
   const players = new Tone.Players(kit).toMaster();
   return players;
 };
 
-export const playSound = (player: Player | null, time: number = 0) => {
+export const playSound = (player: Player | null, time: number = 0): void => {
   if (player) {
     player.start(time);
   }
@@ -78,12 +64,15 @@ export const playSounds = (
   }
 };
 
-export const setTransportBPM = (bpm: number) => {
+export const setTransportBPM = (bpm: number): void => {
   Tone.Transport.timeSignature = 4;
   Tone.Transport.bpm.value = bpm;
 };
 
-export const setupLoop = (player: Player | null, drumPattern: DrumPattern) => {
+export const setupLoop = (
+  player: Player | null,
+  drumPattern: DrumPattern
+): void => {
   const part = new Tone.Part((time: number) => {
     playSound(player, time);
   }, drumPattern);
@@ -94,11 +83,11 @@ export const setupLoop = (player: Player | null, drumPattern: DrumPattern) => {
   setTransportBPM(120);
 };
 
-export const transportStart = () => {
+export const transportStart = (): void => {
   Tone.Transport.start("+0.1");
 };
 
-export const transportStop = () => {
+export const transportStop = (): void => {
   Tone.Transport.stop();
   Tone.Transport.cancel();
 };

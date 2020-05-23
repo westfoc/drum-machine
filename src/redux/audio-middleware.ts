@@ -5,17 +5,18 @@ import {
   unlockTone,
   playSounds,
 } from "../utils/audio-utils";
+import { Drumkit, Players } from "./core";
 import { Dispatch, Middleware, MiddlewareAPI } from "redux";
 import { DrumMachineActionTypes } from "./action-creators";
 
 export const audioMiddleware = (): Middleware => {
-  const drumKit: object = {
+  const drumKit: Drumkit = {
     Kick: "./kick.wav",
     Snare: "./snare.wav",
     Hihat: "./hihat.wav",
     Clap: "./clap.wav",
   };
-  const drumKitPlayers = setupDrumKit(drumKit);
+  const drumKitPlayers: Players = setupDrumKit(drumKit);
 
   const audioMiddlewareInner: Middleware = (api: MiddlewareAPI<Dispatch>) => (
     next: Dispatch<DrumMachineActionTypes>
