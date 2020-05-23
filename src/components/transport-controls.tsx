@@ -5,9 +5,9 @@ import Play from "./play";
 import Stop from "./stop";
 
 interface TransportControlsProps {
-  isPlaying: boolean;
-  setToggleIsPlaying: (isPlaying: IsPlaying) => void;
+  isPlaying: IsPlaying;
   handleStartPlayback: () => void;
+  handleStopPlayback: () => void;
 }
 
 const TransportControlsContainer: SerializedStyles = css`
@@ -29,12 +29,12 @@ const TransportControlsContainerInner: SerializedStyles = css`
 `;
 
 const TransportControls = (props: TransportControlsProps) => {
-  const { isPlaying, handleStartPlayback } = props;
+  const { isPlaying, handleStartPlayback, handleStopPlayback } = props;
   return (
     <div css={TransportControlsContainer}>
       <div css={TransportControlsContainerInner}>
         <Play isPlaying={isPlaying} handleStartPlayback={handleStartPlayback} />
-        <Stop handleStartPlayback={handleStartPlayback} />
+        <Stop handleStopPlayback={handleStopPlayback} />
       </div>
     </div>
   );

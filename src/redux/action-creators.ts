@@ -3,6 +3,7 @@ import { IsPlaying, SelectBeatParams, DrumPatterns } from "./core";
 export const SET_SELECT_BEAT = "SET_SELECT_BEAT";
 export const SET_TOGGLE_IS_PLAYING = "SET_TOGGLE_IS_PLAYING";
 export const HANDLE_START_PLAYBACK = "HANDLE_START_PLAYBACK";
+export const HANDLE_STOP_PLAYBACK = "HANDLE_STOP_PLAYBACK";
 export const PLAY_SOUND = "PLAY_SOUND";
 export const UNLOCK_TONE = "UNLOCK_TONE";
 export const SETUP_LOOP = "SETUP_LOOP";
@@ -15,6 +16,10 @@ interface SelectBeatAction {
 
 interface HandleStartPlaybackAction {
   type: typeof HANDLE_START_PLAYBACK;
+}
+
+interface HandleStopPlaybackAction {
+  type: typeof HANDLE_STOP_PLAYBACK;
 }
 
 interface PlaySoundAction {
@@ -54,9 +59,15 @@ export const setToggleIsPlaying = (
   return { type: SET_TOGGLE_IS_PLAYING, isPlaying };
 };
 
-export const handleStartPlayback = () => {
+export const handleStartPlayback = (): HandleStartPlaybackAction => {
   return {
     type: HANDLE_START_PLAYBACK,
+  };
+};
+
+export const handleStopPlayback = (): HandleStopPlaybackAction => {
+  return {
+    type: HANDLE_STOP_PLAYBACK,
   };
 };
 
@@ -89,6 +100,7 @@ export type DrumMachineActionTypes =
   | SelectBeatAction
   | SetToggleIsPlaying
   | HandleStartPlaybackAction
+  | HandleStopPlaybackAction
   | PlaySoundAction
   | UnlockToneAction
   | SetupLoopAction

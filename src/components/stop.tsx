@@ -2,12 +2,8 @@
 import { css, jsx, SerializedStyles } from "@emotion/core";
 
 interface StopProps {
-  handleStartPlayback: () => void;
+  handleStopPlayback: () => void;
 }
-
-const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
-  handleStartPlayback();
-};
 
 const button: SerializedStyles = css`
   width: 87.5px;
@@ -26,12 +22,9 @@ const stopIcon: SerializedStyles = css`
 `;
 
 const Stop = (props: StopProps) => {
-  const { handleStartPlayback } = props;
+  const { handleStopPlayback } = props;
   return (
-    <button
-      css={button}
-      onClick={() => handleSetToggleIsPlaying(handleStartPlayback)}
-    >
+    <button css={button} onClick={() => handleStopPlayback()}>
       <div css={stopIcon} />
     </button>
   );

@@ -21,3 +21,8 @@ export function* handleStartPlayback() {
     yield put(actions.stopSound());
   }
 }
+
+export function* handleStopPlayback() {
+  yield put(actions.setToggleIsPlaying(false));
+  yield put(actions.stopSound());
+}

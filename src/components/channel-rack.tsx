@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx, SerializedStyles } from "@emotion/core";
 import InstrumentRow from "./instrument-row";
-import { Instruments, SelectBeatParams } from "../redux/core";
+import { Instruments, SelectBeatParams, Instrument } from "../redux/core";
 
 interface ChannelRackProps {
   instruments: Instruments;
@@ -32,7 +32,7 @@ const ChannelRack = (props: ChannelRackProps): JSX.Element => {
     const { instruments, selectBeatAction } = props;
 
     return Object.keys(instruments).map((instrument: string, i: number) => {
-      const instrumentRow = instruments[instrument];
+      const instrumentRow: Instrument = instruments[instrument];
       return (
         <InstrumentRow
           title={instrumentRow.title}
