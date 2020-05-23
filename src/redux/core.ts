@@ -5,6 +5,8 @@ export interface Beat {
 
 export type Beats = ReadonlyArray<Beat>;
 
+export type DrumPattern = ReadonlyArray<ReadonlyArray<string>>;
+
 export interface Instrument {
   title: string;
   file: string;

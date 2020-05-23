@@ -1,50 +1,61 @@
-import { Beat, Beats } from "../redux/core";
+import { Beat, Beats, DrumPattern } from "../redux/core";
 import * as Tone from "tone";
 
-export interface Player {
-  start: () => void;
-  dispose: () => void;
+interface Context {
+  resume: () => Promise<never>;
 }
 
+export interface Player {
+  start: (time: number) => void;
+  dispose: () => void;
+  context: Context;
+}
+
+export const unlockTone = () => Tone.start();
+
+export const createDrumPattern = (beats: Beats): DrumPattern => {
+  return beats.reduce((acc: DrumPattern, beat: Beat): DrumPattern => {
+    if (beat.on) {
+      const test = [...acc, [`0:0:${beat.id}`]];
+      console.log(test); // tslint:disable-line
+      return test;
+    }
+    return acc;
+  }, []);
+};
+
 export const setupSound = (url: string): Player => {
+  Tone.immediate();
   const player = new Tone.Player(url).toMaster();
   return player;
 };
 
-export const playSound = (player: Player | null) => {
+export const playSound = (player: Player | null, time: number = 0) => {
   if (player) {
-    player.start();
+    player.start(time);
   }
 };
 
-export const nextNote = (
-  tempo: number,
-  currentNote: number,
-  nextNoteTime: number
-): void => {
-  const secondsPerBeat: number = 60.0 / tempo;
-  nextNoteTime += secondsPerBeat; // Add beat length to last beat time
-
-  // Advance the beat number and wrap beat to zero
-  currentNote++;
-  if (currentNote === 16) {
-    currentNote = 0;
-  }
+export const setTransportBPM = (bpm: number) => {
+  Tone.Transport.timeSignature = 4;
+  Tone.Transport.bpm.value = bpm;
 };
 
-export const scheduleNote = (
-  beatNumber: number,
-  time: number,
-  beats: Beats,
-  playFunction: () => void
-): void => {
-  const notesInQueue = [];
+export const setupLoop = (player: Player | null, drumPattern: DrumPattern) => {
+  const part = new Tone.Part((time: number) => {
+    playSound(player, time);
+  }, drumPattern);
 
-  notesInQueue.push({ note: beatNumber, time });
+  part.loop = true;
+  part.start(0);
 
-  beats.forEach((beat: Beat) => {
-    if (beat.on) {
-      playFunction();
-    }
-  });
+  setTransportBPM(120);
+};
+
+export const transportStart = () => {
+  Tone.Transport.start("+0.1");
+};
+
+export const transportStop = () => {
+  Tone.Transport.stop();
 };
