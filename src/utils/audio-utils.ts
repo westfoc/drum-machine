@@ -6,6 +6,7 @@ import {
   Instruments,
   Player,
   Players,
+  Drumkit,
 } from "../redux/core";
 import * as Tone from "tone";
 
@@ -14,8 +15,8 @@ export const unlockTone = (): void => Tone.start();
 export const createDrumPattern = (beats: Beats): DrumPattern => {
   return beats.reduce((acc: DrumPattern, beat: Beat): DrumPattern => {
     if (beat.on) {
-      const test = [...acc, [`0:0:${beat.id}`]];
-      return test;
+      const drumPatternBeat = [...acc, [`0:0:${beat.id}`]];
+      return drumPatternBeat;
     }
     return acc;
   }, []);
@@ -42,7 +43,7 @@ export const setupSound = (url: string): Player => {
   return player;
 };
 
-export const setupDrumKit = (kit: object): Players => {
+export const setupDrumKit = (kit: Drumkit): Players => {
   const players = new Tone.Players(kit).toMaster();
   return players;
 };
