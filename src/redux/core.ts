@@ -56,6 +56,11 @@ export type Players = {
   get: (title: string) => Player;
 };
 
+export interface Part {
+  loop: boolean;
+  start: (time: number) => void;
+}
+
 const createdBeats = (): Beats => {
   return Array.from({ length: 16 }, (val, index) => {
     return {

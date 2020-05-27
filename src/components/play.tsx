@@ -44,6 +44,17 @@ const handleSetToggleIsPlaying = (handleStartPlayback: () => void): void => {
   handleStartPlayback();
 };
 
+const renderPlayPauseButton = (isPlaying: boolean): JSX.Element => {
+  return !isPlaying ? (
+    <div css={playIcon} />
+  ) : (
+    <div css={pauseIcon}>
+      <div css={pauseIconBar} />
+      <div css={pauseIconBar} />
+    </div>
+  );
+};
+
 const Play = (props: PlayProps) => {
   const { handleStartPlayback, isPlaying } = props;
   return (
@@ -53,14 +64,7 @@ const Play = (props: PlayProps) => {
         handleSetToggleIsPlaying(handleStartPlayback);
       }}
     >
-      {!isPlaying ? (
-        <div css={playIcon} />
-      ) : (
-        <div css={pauseIcon}>
-          <div css={pauseIconBar} />
-          <div css={pauseIconBar} />
-        </div>
-      )}
+      {renderPlayPauseButton(isPlaying)}
     </button>
   );
 };

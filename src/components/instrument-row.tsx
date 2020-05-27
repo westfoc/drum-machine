@@ -21,6 +21,36 @@ const rowItemStyles: SerializedStyles = css`
   cursor: pointer;
 `;
 
+const instrumentRowContainer: SerializedStyles = css`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: center;
+`;
+
+const instrumentRowContainerInner: SerializedStyles = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+`;
+
+const instrumentTitleContainer: SerializedStyles = css`
+  min-width: 120px;
+  border: 1px solid #5c5c5c;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #473d3d;
+  margin-right: 5px;
+`;
+
+const instrumentTitleText: SerializedStyles = css`
+  font-size: 14px;
+`;
+
 class InstrumentRow extends Component<InstrumentRowProps> {
   genOnOffColor = (beatOn: boolean): number => {
     return beatOn ? 0.4 : 1;
@@ -41,7 +71,6 @@ class InstrumentRow extends Component<InstrumentRowProps> {
               background-color: #6b2b2b;
               opacity: ${opacity};
             `;
-      console.log(backgroundColor); // tslint:disable-line
       return (
         <RowItem
           cssProp={[rowItemStyles, backgroundColor]}
@@ -58,38 +87,12 @@ class InstrumentRow extends Component<InstrumentRowProps> {
   render(): JSX.Element {
     const { title } = this.props;
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginBottom: "10px",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            height: "45px",
-          }}
-        >
-          <div
-            style={{
-              minWidth: "120px",
-              border: "1px solid #5c5c5c",
-              height: "40px",
-              borderRadius: "5px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#473d3d",
-              marginRight: "5px",
-            }}
-          >
-            <p style={{ fontSize: "14px" }}>{title}</p>
+      <div css={instrumentRowContainer}>
+        <div css={instrumentRowContainerInner}>
+          <div css={instrumentTitleContainer}>
+            <p css={instrumentTitleText}>{title}</p>
           </div>
-          {this.renderRow()}{" "}
+          {this.renderRow()}
         </div>
       </div>
     );
