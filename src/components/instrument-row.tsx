@@ -1,13 +1,16 @@
 /** @jsx jsx */
 import { css, jsx, SerializedStyles } from "@emotion/core";
+import { Beats, Beat, SelectBeatParams } from "../redux/core";
 import { Component } from "react";
 import RowItem from "./row-item";
-import { Beats, Beat, SelectBeatParams } from "../redux/core";
+import Mute from "./mute";
 
 interface InstrumentRowProps {
   title: string;
   beats: Beats;
+  isMuted: boolean;
   selectBeatAction: (params: SelectBeatParams) => void;
+  handleMuteSound: (title: string) => void;
 }
 
 const rowItemStyles: SerializedStyles = css`
@@ -85,10 +88,15 @@ class InstrumentRow extends Component<InstrumentRowProps> {
   };
 
   render(): JSX.Element {
-    const { title } = this.props;
+    const { title, handleMuteSound, isMuted } = this.props;
     return (
       <div css={instrumentRowContainer}>
         <div css={instrumentRowContainerInner}>
+          <Mute
+            title={title}
+            handleMuteSound={handleMuteSound}
+            isMuted={isMuted}
+          />
           <div css={instrumentTitleContainer}>
             <p css={instrumentTitleText}>{title}</p>
           </div>

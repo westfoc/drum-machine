@@ -28,7 +28,7 @@ const TransportControlsContainerInner: SerializedStyles = css`
   border-radius: 5px;
 `;
 
-const TransportControls = (props: TransportControlsProps) => {
+const TransportControls = (props: TransportControlsProps): JSX.Element => {
   const { isPlaying, handleStartPlayback, handleStopPlayback } = props;
   return (
     <div css={TransportControlsContainer}>

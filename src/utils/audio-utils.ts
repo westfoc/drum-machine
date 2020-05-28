@@ -10,6 +10,7 @@ import {
   Part,
 } from "../redux/core";
 import * as Tone from "tone";
+
 // UNLOCK TONE
 export const unlockTone = (): void => Tone.start();
 
@@ -101,4 +102,14 @@ export const setupLoop = (
   part.start(0);
 
   setTransportBPM(120);
+};
+
+export const muteSound = (players: Players, title: string): void => {
+  const player: Player = getPlayer(players, title);
+  player.mute = !player.mute;
+};
+
+export const getPlayer = (players: Players, title: string): Player => {
+  const player: Player = players.get(title);
+  return player;
 };

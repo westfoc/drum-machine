@@ -17,7 +17,7 @@ const selectBeat = (
   selectBeatAction(params);
 };
 
-const RowItem = (props: RowItemProps) => {
+const RowItem = (props: RowItemProps): JSX.Element => {
   const { cssProp, on, id, title, selectBeatAction } = props;
   return (
     <div

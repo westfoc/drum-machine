@@ -21,7 +21,7 @@ const stopIcon: SerializedStyles = css`
   background-color: white;
 `;
 
-const Stop = (props: StopProps) => {
+const Stop = (props: StopProps): JSX.Element => {
   const { handleStopPlayback } = props;
   return (
     <button css={button} onClick={() => handleStopPlayback()}>

@@ -6,6 +6,7 @@ import { Instruments, SelectBeatParams, Instrument } from "../redux/core";
 interface ChannelRackProps {
   instruments: Instruments;
   selectBeatAction: (params: SelectBeatParams) => void;
+  handleMuteSound: (title: string) => void;
 }
 
 const transportContainer: SerializedStyles = css`
@@ -29,7 +30,7 @@ const transportContainerBackground: SerializedStyles = css`
 
 const ChannelRack = (props: ChannelRackProps): JSX.Element => {
   const renderRows = (): JSX.Element[] => {
-    const { instruments, selectBeatAction } = props;
+    const { instruments, selectBeatAction, handleMuteSound } = props;
 
     return Object.keys(instruments).map((instrument: string, i: number) => {
       const instrumentRow: Instrument = instruments[instrument];
@@ -37,8 +38,10 @@ const ChannelRack = (props: ChannelRackProps): JSX.Element => {
         <InstrumentRow
           title={instrumentRow.title}
           beats={instrumentRow.beats}
+          isMuted={instrumentRow.isMuted}
           key={`${instrumentRow.title}row${i}`}
           selectBeatAction={selectBeatAction}
+          handleMuteSound={handleMuteSound}
         />
       );
     });

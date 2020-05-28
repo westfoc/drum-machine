@@ -2,11 +2,11 @@ import { put, select, call } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { Instruments, DrumPatterns, IsPlaying } from "../../redux/core";
 import * as actions from "../action-creators";
-import { getIsPlaying, getInstruments } from "../selectors";
+import { getIsPlaying, getInstruments, getIsMuted } from "../selectors";
 import { createDrumPatterns } from "../../utils/audio-utils";
 
 export function* handleStartPlayback(): SagaIterator {
-  // Resume audio contenxt for Tone JS
+  // Resume audio context for Tone JS
   yield put(actions.unlockTone());
 
   const isPlayingState: IsPlaying = yield select(getIsPlaying);
@@ -30,4 +30,14 @@ export function* handleStartPlayback(): SagaIterator {
 export function* handleStopPlayback(): SagaIterator {
   yield put(actions.setToggleIsPlaying(false));
   yield put(actions.stopSound());
+}
+
+export function* handleMuteSound(
+  action: actions.HandleMuteSoundAction
+): SagaIterator {
+  const { title } = action;
+  const isMuted: boolean = yield select(getIsMuted, title);
+
+  yield put(actions.setInstrumentIsMuted(!isMuted, title));
+  yield put(actions.muteSound(title));
 }
