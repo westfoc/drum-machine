@@ -68,6 +68,10 @@ export const transportStop = (): void => {
   Tone.Transport.cancel();
 };
 
+export const transportCancel = (): void => {
+  Tone.Transport.cancel();
+};
+
 export const setTransportBPM = (bpm: number): void => {
   Tone.Transport.timeSignature = 4;
   Tone.Transport.bpm.value = bpm;
@@ -104,9 +108,12 @@ export const setupLoop = (
   setTransportBPM(120);
 };
 
-export const muteSound = (players: Players, title: string): void => {
-  const player: Player = getPlayer(players, title);
-  player.mute = !player.mute;
+export const muteSound = async (
+  players: Players,
+  title: string
+): Promise<void> => {
+  const player: Player = await getPlayer(players, title);
+  player.mute = await !player.mute;
 };
 
 export const getPlayer = (players: Players, title: string): Player => {

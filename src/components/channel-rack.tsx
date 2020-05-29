@@ -7,6 +7,7 @@ interface ChannelRackProps {
   instruments: Instruments;
   selectBeatAction: (params: SelectBeatParams) => void;
   handleMuteSound: (title: string) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
 }
 
 const transportContainer: SerializedStyles = css`
@@ -30,7 +31,12 @@ const transportContainerBackground: SerializedStyles = css`
 
 const ChannelRack = (props: ChannelRackProps): JSX.Element => {
   const renderRows = (): JSX.Element[] => {
-    const { instruments, selectBeatAction, handleMuteSound } = props;
+    const {
+      instruments,
+      selectBeatAction,
+      handleMuteSound,
+      handleSelectBeat,
+    } = props;
 
     return Object.keys(instruments).map((instrument: string, i: number) => {
       const instrumentRow: Instrument = instruments[instrument];
@@ -42,6 +48,7 @@ const ChannelRack = (props: ChannelRackProps): JSX.Element => {
           key={`${instrumentRow.title}row${i}`}
           selectBeatAction={selectBeatAction}
           handleMuteSound={handleMuteSound}
+          handleSelectBeat={handleSelectBeat}
         />
       );
     });

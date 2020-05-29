@@ -20,6 +20,7 @@ interface DrumFaceContainerProps {
   handleStartPlayback: () => void;
   handleStopPlayback: () => void;
   handleMuteSound: (title: string) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
 }
 
 const appContainer: SerializedStyles = css`
@@ -51,6 +52,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps): JSX.Element => {
     handleStartPlayback,
     handleStopPlayback,
     handleMuteSound,
+    handleSelectBeat,
   } = props;
   return (
     <div css={appContainer}>
@@ -65,6 +67,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps): JSX.Element => {
           instruments={instruments}
           selectBeatAction={selectBeatAction}
           handleMuteSound={handleMuteSound}
+          handleSelectBeat={handleSelectBeat}
         />
       </header>
     </div>

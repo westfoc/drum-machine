@@ -11,6 +11,7 @@ interface InstrumentRowProps {
   isMuted: boolean;
   selectBeatAction: (params: SelectBeatParams) => void;
   handleMuteSound: (title: string) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
 }
 
 const rowItemStyles: SerializedStyles = css`
@@ -60,7 +61,7 @@ class InstrumentRow extends Component<InstrumentRowProps> {
   };
 
   renderRow = (): JSX.Element[] => {
-    const { beats, title, selectBeatAction } = this.props;
+    const { beats, title, selectBeatAction, handleSelectBeat } = this.props;
 
     return beats.map((beat: Beat, i: number) => {
       const opacity = this.genOnOffColor(beat.on);
@@ -82,6 +83,7 @@ class InstrumentRow extends Component<InstrumentRowProps> {
           id={beat.id}
           title={title}
           selectBeatAction={selectBeatAction}
+          handleSelectBeat={handleSelectBeat}
         />
       );
     });

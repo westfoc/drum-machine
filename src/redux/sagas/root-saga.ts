@@ -4,6 +4,7 @@ import {
   handleStartPlayback,
   handleStopPlayback,
   handleMuteSound,
+  handleSelectBeat,
 } from "./playback-sagas";
 
 export function* sagas(): SagaIterator {
@@ -12,5 +13,6 @@ export function* sagas(): SagaIterator {
     yield takeEvery("HANDLE_START_PLAYBACK", handleStartPlayback),
     yield takeEvery("HANDLE_STOP_PLAYBACK", handleStopPlayback),
     yield takeEvery("HANDLE_MUTE_SOUND", handleMuteSound),
+    yield takeEvery("HANDLE_SELECT_BEAT", handleSelectBeat),
   ];
 }

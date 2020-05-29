@@ -41,3 +41,18 @@ export function* handleMuteSound(
   yield put(actions.setInstrumentIsMuted(!isMuted, title));
   yield put(actions.muteSound(title));
 }
+
+export function* handleSelectBeat(
+  action: actions.HandleSelectBeatAction
+): SagaIterator {
+  yield put(actions.setTransportCancel());
+  yield put(actions.selectBeat(action.params));
+
+  const instruments: Instruments = yield select(getInstruments);
+  const drumPatterns: DrumPatterns = yield call(
+    createDrumPatterns,
+    instruments
+  );
+
+  yield put(actions.setupLoop(drumPatterns));
+}
