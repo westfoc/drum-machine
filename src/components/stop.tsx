@@ -13,6 +13,7 @@ const button: SerializedStyles = css`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  outline: none;
 `;
 
 const stopIcon: SerializedStyles = css`
