@@ -8,21 +8,22 @@ interface RowItemProps {
   id: string;
   title: string;
   selectBeatAction: (params: SelectBeatParams) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
 }
 
 const selectBeat = (
   params: SelectBeatParams,
-  selectBeatAction: (params: SelectBeatParams) => void
+  handleSelectBeat: (params: SelectBeatParams) => void
 ) => {
-  selectBeatAction(params);
+  handleSelectBeat(params);
 };
 
 const RowItem = (props: RowItemProps): JSX.Element => {
-  const { cssProp, on, id, title, selectBeatAction } = props;
+  const { cssProp, on, id, title, handleSelectBeat } = props;
   return (
     <div
       css={cssProp}
-      onClick={() => selectBeat({ id, title, on }, selectBeatAction)}
+      onClick={() => selectBeat({ id, title, on }, handleSelectBeat)}
     />
   );
 };
