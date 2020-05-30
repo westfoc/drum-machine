@@ -7,7 +7,6 @@ interface RowItemProps {
   on: boolean;
   id: string;
   title: string;
-  selectBeatAction: (params: SelectBeatParams) => void;
   handleSelectBeat: (params: SelectBeatParams) => void;
 }
 

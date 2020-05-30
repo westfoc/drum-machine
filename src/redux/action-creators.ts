@@ -14,6 +14,7 @@ export const STOP_SOUND = "STOP_SOUND";
 export const MUTE_SOUND = "MUTE_SOUND";
 export const GET_PLAYER = "GET_PLAYER";
 export const SET_CANCEL_TRANSPORT = "SET_CANCEL_TRANSPORT";
+export const SET_TEMPO = "SET_TEMPO";
 
 // TYPES AND INTERFACES
 interface SelectBeatAction {
@@ -79,6 +80,11 @@ export interface SetInstrumentIsMutedAction {
 
 interface SetCancelTransportAction {
   type: typeof SET_CANCEL_TRANSPORT;
+}
+
+interface SetTempoAction {
+  type: typeof SET_TEMPO;
+  bpm: number;
 }
 
 // ACTION CREATORS
@@ -180,6 +186,13 @@ export const setTransportCancel = (): SetCancelTransportAction => {
   };
 };
 
+export const setTempo = (bpm: number): SetTempoAction => {
+  return {
+    type: SET_TEMPO,
+    bpm,
+  };
+};
+
 export type DrumMachineActionTypes =
   | SelectBeatAction
   | SetToggleIsPlaying
@@ -194,4 +207,5 @@ export type DrumMachineActionTypes =
   | StopSoundAction
   | MuteSoundAction
   | GetPlayerAction
-  | SetCancelTransportAction;
+  | SetCancelTransportAction
+  | SetTempoAction;

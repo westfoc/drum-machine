@@ -7,6 +7,7 @@ import {
   muteSound,
   getPlayer,
   transportCancel,
+  setTransportBPM,
 } from "../utils/audio-utils";
 import { Drumkit, Players } from "./core";
 import { Dispatch, Middleware, MiddlewareAPI } from "redux";
@@ -44,6 +45,9 @@ export const audioMiddleware = (): Middleware => {
         return getPlayer(drumKitPlayers, action.title);
       case "SET_CANCEL_TRANSPORT":
         transportCancel();
+        break;
+      case "SET_TEMPO":
+        setTransportBPM(action.bpm);
         break;
       default:
         break;

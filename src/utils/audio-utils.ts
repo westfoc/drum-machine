@@ -104,8 +104,6 @@ export const setupLoop = (
 
   part.loop = true;
   part.start(0);
-
-  setTransportBPM(120);
 };
 
 export const muteSound = async (

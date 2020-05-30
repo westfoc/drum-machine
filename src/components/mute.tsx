@@ -24,7 +24,7 @@ const generateButtonColor = (isMuted: boolean): SerializedStyles => {
         background-color: grey;
       `
     : css`
-        background-color: green;
+        background-color: #a2eb34;
       `;
 };
 
