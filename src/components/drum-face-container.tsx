@@ -16,9 +16,11 @@ const DRUM_MACHINE_TEXT: string = "Drum machine";
 interface DrumFaceContainerProps {
   instruments: Instruments;
   isPlaying: IsPlaying;
-  selectBeatAction: (params: SelectBeatParams) => void;
   handleStartPlayback: () => void;
   handleStopPlayback: () => void;
+  handleMuteSound: (title: string) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
+  setTempo: (bpm: number) => void;
 }
 
 const appContainer: SerializedStyles = css`
@@ -42,13 +44,15 @@ const appHeader: SerializedStyles = css`
   color: white;
 `;
 
-const DrumFaceContainer = (props: DrumFaceContainerProps) => {
+const DrumFaceContainer = (props: DrumFaceContainerProps): JSX.Element => {
   const {
     instruments,
-    selectBeatAction,
     isPlaying,
     handleStartPlayback,
     handleStopPlayback,
+    handleMuteSound,
+    handleSelectBeat,
+    setTempo,
   } = props;
   return (
     <div css={appContainer}>
@@ -58,10 +62,12 @@ const DrumFaceContainer = (props: DrumFaceContainerProps) => {
           isPlaying={isPlaying}
           handleStartPlayback={handleStartPlayback}
           handleStopPlayback={handleStopPlayback}
+          setTempo={setTempo}
         />
         <ChannelRack
           instruments={instruments}
-          selectBeatAction={selectBeatAction}
+          handleMuteSound={handleMuteSound}
+          handleSelectBeat={handleSelectBeat}
         />
       </header>
     </div>

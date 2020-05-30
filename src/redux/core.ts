@@ -19,6 +19,7 @@ export interface Instrument {
   title: string;
   file: string;
   beats: Beats;
+  isMuted: boolean;
 }
 
 export interface Instruments {
@@ -48,6 +49,7 @@ export interface Player {
   start: (time: number) => void;
   dispose: () => void;
   context: Context;
+  mute: boolean;
 }
 
 export type Players = {
@@ -55,6 +57,11 @@ export type Players = {
 } & {
   get: (title: string) => Player;
 };
+
+export interface Part {
+  loop: boolean;
+  start: (time: number) => void;
+}
 
 const createdBeats = (): Beats => {
   return Array.from({ length: 16 }, (val, index) => {
@@ -73,6 +80,7 @@ const initialInstruments: Instruments = titles.reduce(
         title,
         file: "",
         beats: createdBeats(),
+        isMuted: false,
       },
     };
   },

@@ -1,13 +1,16 @@
 /** @jsx jsx */
 import { css, jsx, SerializedStyles } from "@emotion/core";
+import { Beats, Beat, SelectBeatParams } from "../redux/core";
 import { Component } from "react";
 import RowItem from "./row-item";
-import { Beats, Beat, SelectBeatParams } from "../redux/core";
+import Mute from "./mute";
 
 interface InstrumentRowProps {
   title: string;
   beats: Beats;
-  selectBeatAction: (params: SelectBeatParams) => void;
+  isMuted: boolean;
+  handleMuteSound: (title: string) => void;
+  handleSelectBeat: (params: SelectBeatParams) => void;
 }
 
 const rowItemStyles: SerializedStyles = css`
@@ -21,13 +24,43 @@ const rowItemStyles: SerializedStyles = css`
   cursor: pointer;
 `;
 
+const instrumentRowContainer: SerializedStyles = css`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: center;
+`;
+
+const instrumentRowContainerInner: SerializedStyles = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+`;
+
+const instrumentTitleContainer: SerializedStyles = css`
+  min-width: 120px;
+  border: 1px solid #5c5c5c;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #473d3d;
+  margin-right: 5px;
+`;
+
+const instrumentTitleText: SerializedStyles = css`
+  font-size: 14px;
+`;
+
 class InstrumentRow extends Component<InstrumentRowProps> {
   genOnOffColor = (beatOn: boolean): number => {
     return beatOn ? 0.4 : 1;
   };
 
   renderRow = (): JSX.Element[] => {
-    const { beats, title, selectBeatAction } = this.props;
+    const { beats, title, handleSelectBeat } = this.props;
 
     return beats.map((beat: Beat, i: number) => {
       const opacity = this.genOnOffColor(beat.on);
@@ -41,7 +74,6 @@ class InstrumentRow extends Component<InstrumentRowProps> {
               background-color: #6b2b2b;
               opacity: ${opacity};
             `;
-      console.log(backgroundColor); // tslint:disable-line
       return (
         <RowItem
           cssProp={[rowItemStyles, backgroundColor]}
@@ -49,47 +81,26 @@ class InstrumentRow extends Component<InstrumentRowProps> {
           on={beat.on}
           id={beat.id}
           title={title}
-          selectBeatAction={selectBeatAction}
+          handleSelectBeat={handleSelectBeat}
         />
       );
     });
   };
 
   render(): JSX.Element {
-    const { title } = this.props;
+    const { title, handleMuteSound, isMuted } = this.props;
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginBottom: "10px",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            height: "45px",
-          }}
-        >
-          <div
-            style={{
-              minWidth: "120px",
-              border: "1px solid #5c5c5c",
-              height: "40px",
-              borderRadius: "5px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#473d3d",
-              marginRight: "5px",
-            }}
-          >
-            <p style={{ fontSize: "14px" }}>{title}</p>
+      <div css={instrumentRowContainer}>
+        <div css={instrumentRowContainerInner}>
+          <Mute
+            title={title}
+            handleMuteSound={handleMuteSound}
+            isMuted={isMuted}
+          />
+          <div css={instrumentTitleContainer}>
+            <p css={instrumentTitleText}>{title}</p>
           </div>
-          {this.renderRow()}{" "}
+          {this.renderRow()}
         </div>
       </div>
     );
