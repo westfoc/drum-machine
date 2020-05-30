@@ -14,6 +14,8 @@ const tempoInput: SerializedStyles = css`
   outline: none;
   font-size: 20px;
   appearance: none;
+  display: flex;
+  text-align: right;
 `;
 
 const Tempo = (props: TempoProps) => {
