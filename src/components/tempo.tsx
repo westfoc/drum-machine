@@ -8,14 +8,15 @@ interface TempoProps {
 
 const tempoInput: SerializedStyles = css`
   box-sizing: border-box;
-  height: 45px;
+  height: 55px;
   width: 75px;
-  padding: 7px 0 7px 20px;
+  padding: 7px 0;
   outline: none;
   font-size: 20px;
   appearance: none;
   display: flex;
   text-align: right;
+  cursor: row-resize;
 `;
 
 const Tempo = (props: TempoProps) => {
@@ -28,10 +29,23 @@ const Tempo = (props: TempoProps) => {
     const val = (document.getElementById("tempo-input") as HTMLInputElement)
       .value;
     const valToNumber: number = parseInt(val, 10);
-    const modifiedNumber: number = operation(valToNumber);
+    const modifiedNumber: number = modifyNumber(valToNumber, operation);
 
-    setBpm(String(modifiedNumber));
-    setTempo(Number(modifiedNumber));
+    if (valToNumber >= 10 && valToNumber <= 500) {
+      setBpm(String(modifiedNumber));
+      setTempo(Number(modifiedNumber));
+    }
+  };
+
+  const modifyNumber = (
+    numVal: number,
+    operation: (num: number) => number
+  ): number => {
+    return (numVal === 10 && operation.toString().includes("+")) ||
+      (numVal === 500 && operation.toString().includes("-")) ||
+      (numVal > 10 && numVal < 500)
+      ? operation(numVal)
+      : numVal;
   };
 
   const increment = (num: number): number => {
@@ -82,6 +96,7 @@ const Tempo = (props: TempoProps) => {
       min={10}
       max={500}
       value={bpm}
+      readOnly={true}
     />
   );
 };
