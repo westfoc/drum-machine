@@ -4,6 +4,11 @@ You can find the Drum machine sound files in the public folder.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
+## Dependencies 
+- node v16
+- `nvm use 16`
+- on newer macs run `npm install --legacy-peer-deps`
+
 ## Available Scripts
 
 In the project directory, you can run:
