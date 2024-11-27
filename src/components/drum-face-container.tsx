@@ -33,8 +33,7 @@ const appContainer: SerializedStyles = css`
   -moz-osx-font-smoothing: grayscale;
 `;
 
-const appHeader: SerializedStyles = css`
-  background-color: #282c34;
+const shell: SerializedStyles = css`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -56,7 +55,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps): JSX.Element => {
   } = props;
   return (
     <div css={appContainer}>
-      <header css={appHeader}>
+      <div css={shell}>
         <p>{DRUM_MACHINE_TEXT}</p>
         <TransportControls
           isPlaying={isPlaying}
@@ -69,7 +68,7 @@ const DrumFaceContainer = (props: DrumFaceContainerProps): JSX.Element => {
           handleMuteSound={handleMuteSound}
           handleSelectBeat={handleSelectBeat}
         />
-      </header>
+      </div>
     </div>
   );
 };
